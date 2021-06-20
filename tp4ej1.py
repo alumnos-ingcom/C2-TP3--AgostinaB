@@ -5,9 +5,10 @@
 ################
 
 class IngresoIncorrecto(Exception):
-    pass
     """Esta es la Excepcion para el ingreso incorrecto"""
-    
+    pass
+ 
+ 
     
 def ingreso_entero(mensaje):
     """
@@ -18,30 +19,35 @@ def ingreso_entero(mensaje):
     
     try:
         entero = int(ingreso)
+        
     except ValueError as err:
-        raise IngresoIncorrecto("No era un número!") from err
+        entero = ingreso_entero_reintento(mensaje)
+   
     return entero
 
 
-def ingreso_entero_reintento(mensaje, cantidad_reintentos=5):
+
+def ingreso_entero_reintento(mensaje, cantidad_reintentos=4):
     """
     Esta funcion muestra un mensaje y agrega # para indicar el ingreso
     de un número entero. Permite reintentar el ingreso 5 veces.
     """
-    ingreso = input(mensaje + " #")    
+    ingreso = input(mensaje +",  te quedan: " +
+                    str(cantidad_reintentos) + " reintentos #")    
+    
     try:
         numero = int(ingreso)
-        print(f'Cantidad de reintentos: {cantidad_reintentos}')
+        
     except ValueError as err:
-        cantidad_reintentos = cantidad_reintentos -1        
-        if cantidad_reintentos == 0:
-            raise IngresoIncorrecto("Valor inválido. Cantidad de reintentos:0") from err
+        if cantidad_reintentos == 0: 
+            raise IngresoIncorrecto("No es un número!") from err
         else:
-            print(f'Cantidad de reintentos: {cantidad_reintentos}. Ingrese un número entero')
+            cantidad_reintentos = cantidad_reintentos - 1
             numero = ingreso_entero_reintento(mensaje, cantidad_reintentos)
     return numero
-
-
+         
+                  
+         
 def ingreso_entero_restringido(mensaje, valor_minimo=0, valor_maximo=10):
     """
     Esta funcion muestra un mensaje y agrega # para indicar el ingreso
@@ -49,24 +55,28 @@ def ingreso_entero_restringido(mensaje, valor_minimo=0, valor_maximo=10):
     mínimo y máximo.
     """
     print(f'El rango de valores válidos es: {valor_minimo} - {valor_maximo}')
-    ingreso = input(mensaje + " #")    
-    try:
-        numero = int(ingreso)      
-    except ValueError as err:              
-        if numero < valor_minimo:
-            raise IngresoIncorrecto("Valor inválido. Es inferior al valor mínimo") from err
-        elif numero > valor_maximo:
-            raise IngresoIncorrecto("Valor inválido. Es superior al valor máximo") from err
-        else:            
-            print(f'El número ingresado es válido')
-        return numero
+    numero = int(input(mensaje + " #"))
+    
+    if numero < valor_minimo:
+        raise IngresoIncorrecto("Valor inválido. Es inferior al valor mínimo") 
+    elif numero > valor_maximo:
+        raise IngresoIncorrecto("Valor inválido. Es superior al valor máximo")
+    else:            
+        print(f'El número ingresado es válido')
+    
+    return numero
+        
   
   
 def prueba():
+    
     mensaje = "Ingrese un número entero"
     ingreso = ingreso_entero(mensaje)
-    ingreso = ingreso_entero_reintento(mensaje)
+    print(f'El número ingresado es: {ingreso}')
+    mensaje = "Ingrese un número entero entre 0 y 10"
     ingreso = ingreso_entero_restringido(mensaje)
+    print(f'El número ingresado es: {ingreso}')    
+   
 
 
 if __name__ == "__main__":
