@@ -7,10 +7,16 @@
 def suma_lenta(numero,otro_numero):
     """Esta función realiza la suma lenta de dos numeros enteros.
     """
+    if otro_numero > 0:
+        for i in range(otro_numero):
+            numero = numero + 1
+
+    elif otro_numero < 0:
+        otro_numero = otro_numero * (-1)
+        for j in range(otro_numero):
+            numero = numero - 1
     
-    for i in range(otro_numero+1):
-        suma = numero+i    
-    return suma        
+    return numero        
     
 def prueba():
     print('Ejercicio 2: Suma de dos números enteros \n')

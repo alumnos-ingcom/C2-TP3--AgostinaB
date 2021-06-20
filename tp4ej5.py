@@ -10,14 +10,13 @@ def signo (numero):
     """
     
     if numero < 0:
-        resultado = ('negativo')
-        return resultado
+        resultado = -1
     elif numero == 0:
-        resultado = ('cero')
-        return resultado
-    else :
-        resultado = ('positivo')
-        return resultado
+        resultado = 0
+    else:
+        resultado = 1
+    
+    return resultado
                     
     
 def prueba():

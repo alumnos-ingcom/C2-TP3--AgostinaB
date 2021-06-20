@@ -16,12 +16,12 @@ def factores_primos(numero):
         if (numero % i)==0 :
             if es_primo(i) == True:
                 divisores.append(i)    
-    return divisores
+    return tuple(divisores)
 
 def prueba():
     print('Ejercicio 10: Factores primos \n')
     numero = int (input("Ingrese un número entero: "))
-    tupla = tuple(factores_primos(numero))    
+    tupla = factores_primos(numero)    
     print(f'La tupla de factores primos de {numero} es: {tupla}')
 
 if __name__ == "__main__":

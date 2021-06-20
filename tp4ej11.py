@@ -24,7 +24,7 @@ def es_palindromo(texto):
     
 def prueba():
     print('Ejercicio 11: Palíndromo \n')
-    palabra = str (input("Ingrese palabra: "))
+    palabra = input("Ingrese palabra: ")
     resultado = es_palindromo(palabra)
     print(f'\n El resultado de evaluar {palabra} como palíndormo es: {resultado}')
         
